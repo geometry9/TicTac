@@ -1,0 +1,12 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "mongodb": "mongodb://localhost:27017/TicTac",
+  "public": "../public/",
+  "auth": {
+    "token": {
+      "secret": "vUhk0ryrGkTVIj8uypp/+YHTQmK3kMphtdGii5QJM0hUW+Wl0D6GStehMuu2BI4xqUphB/l2QKv078jGicT8LA=="
+    },
+    "local": {}
+  }
+}
