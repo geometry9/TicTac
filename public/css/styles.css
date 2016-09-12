@@ -1,7 +1,11 @@
-.grid{ width: 440px;}
+.grid{
+  width: 440px;
+  margin: 0 auto;
+}
 .col-3 div{
   width: 100px;
   height: 100px;
   margin: 0;
   background-color: black;
+  color: white;
 }

@@ -83,6 +83,11 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'gameTitle' },
+	          'Tic Tac Toe'
+	        ),
 	        _react2.default.createElement(_index2.default, null)
 	      );
 	    }
@@ -21519,19 +21524,28 @@
 	  }, {
 	    key: 'move',
 	    value: function move(pos, player) {
+	      var matrix = this.state.boardMatrix;
+	      if (!matrix[pos]) {
+	        matrix[pos] = player === 'user' ? 'o' : 'x';
+	      } else {
+	        console.log('wrong move bucko');
+	      }
+	      this.setState({ boardMatrix: matrix });
 	      var winner = this.checkWin();
 
 	      if (winner) {
 	        console.log('win');
 	      } else {
-	        callback();
+	        console.log('keep playin');
 	      }
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var clickHandler = function clickHandler() {
-	        return console.log('CLICKED!');
+	      var _this2 = this;
+
+	      var clickHandler = function clickHandler(e) {
+	        return _this2.move(e.target.dataset.cell, 'user');
 	      };
 
 	      return _react2.default.createElement(
@@ -21546,7 +21560,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 0, onClick: clickHandler, 'data-cell': 0 },
-	              '-'
+	              this.state.boardMatrix[0]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21555,7 +21569,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 1, onClick: clickHandler, 'data-cell': 1 },
-	              '-'
+	              this.state.boardMatrix[1]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21564,7 +21578,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 2, onClick: clickHandler, 'data-cell': 2 },
-	              '-'
+	              this.state.boardMatrix[2]
 	            )
 	          )
 	        ),
@@ -21577,7 +21591,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 3, onClick: clickHandler, 'data-cell': 3 },
-	              '-'
+	              this.state.boardMatrix[3]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21586,7 +21600,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 4, onClick: clickHandler, 'data-cell': 4 },
-	              '-'
+	              this.state.boardMatrix[4]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21595,7 +21609,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 5, onClick: clickHandler, 'data-cell': 5 },
-	              '-'
+	              this.state.boardMatrix[5]
 	            )
 	          )
 	        ),
@@ -21608,7 +21622,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 6, onClick: clickHandler, 'data-cell': 6 },
-	              '-'
+	              this.state.boardMatrix[6]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21617,7 +21631,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 7, onClick: clickHandler, 'data-cell': 7 },
-	              '-'
+	              this.state.boardMatrix[7]
 	            )
 	          ),
 	          _react2.default.createElement(
@@ -21626,7 +21640,7 @@
 	            _react2.default.createElement(
 	              'div',
 	              { key: 8, onClick: clickHandler, 'data-cell': 8 },
-	              '-'
+	              this.state.boardMatrix[8]
 	            )
 	          )
 	        )
