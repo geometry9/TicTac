@@ -1,4 +1,5 @@
 import React from 'react';
+import { uniq } from 'lodash';
 
 class GameBoard extends React.Component {
 
@@ -8,7 +9,8 @@ class GameBoard extends React.Component {
       stalemate: false,
       winner: false,
       boardMatrix: this.clearBoard(),
-      turn: 0,
+      turn: true,
+      frozen: false,
     };
   }
 
@@ -19,28 +21,61 @@ class GameBoard extends React.Component {
   }
 
   checkWin(){
-    console.log('checkingWinner');
+    const horizontalCheck = {list: [0,3,6], sum: 1 };
+    const verticalCheck = {list: [0,1,2], sum: 3 };
+    const diagonalCheck1 = {list: [0], sum: 4};
+    const diagonalCheck2 = {list: [2], sum: 2};
+
+    if(!this.state.winner){
+      this.iterateArray(horizontalCheck);
+    }
+    if(!this.state.winner){
+      this.iterateArray(verticalCheck);
+    }
+    if(!this.state.winner){
+      this.iterateArray(diagonalCheck1);
+    }
+    if(!this.state.winner){
+      this.iterateArray(diagonalCheck2);
+    }
+  }
+
+  iterateArray(check){
+    const b = this.state.boardMatrix;
+    for (var i = 0; i < check.list.length; i++) {
+      console.log('Checking these items: ', b[check.list[i]], b[check.list[i] + check.sum], b[check.list[i] + check.sum * 2]);
+
+      // console.log(b[check.list[i]], b[check.list[i + check.sum]],
+      //   b[check.list[i + check.sum]], b[check.list[i + check.sum * 2]]);
+
+      if(b[check.list[i]] && b[check.list[i]] === b[check.list[i] + check.sum] &&
+        b[check.list[i] + check.sum] === b[check.list[i] + check.sum * 2]){
+        this.setState({ winner: true });
+      }
+    }
   }
 
   move(pos, player) {
     var matrix = this.state.boardMatrix;
     if(!matrix[pos]){
       matrix[pos] = (player === 'user') ? 'o' : 'x';
+      this.setState({ boardMatrix: matrix }, this.checkWin());
     }else{
       console.log('wrong move bucko');
     }
-    this.setState({ boardMatrix: matrix });
-    const winner = this.checkWin();
-
-    if (winner) {
-      console.log('win')
+    console.log(this.state)
+    if (this.state.winner) {
+      alert('win')
     } else {
       console.log('keep playin');
     }
   }
 
   render() {
-    const clickHandler = (e) => this.move(e.target.dataset.cell, 'user');
+    const clickHandler = (e) => {
+      if(!this.state.frozen && this.state.turn)
+      this.move(e.target.dataset.cell, 'user');
+    }
 
     return (
       <div className="grid">
