@@ -1,5 +1,6 @@
 import React from 'react';
-import { uniq } from 'lodash';
+import swal from 'sweetalert';
+import req from 'superagent';
 
 class GameBoard extends React.Component {
 
@@ -15,9 +16,9 @@ class GameBoard extends React.Component {
   }
 
   clearBoard() {
-    return [0,0,0,
-     0,0,0,
-     0,0,0];
+    return [null,null,null,
+     null,null,null,
+     null,null,null];
   }
 
   checkWin(){
@@ -43,14 +44,9 @@ class GameBoard extends React.Component {
   iterateArray(check){
     const b = this.state.boardMatrix;
     for (var i = 0; i < check.list.length; i++) {
-      console.log('Checking these items: ', b[check.list[i]], b[check.list[i] + check.sum], b[check.list[i] + check.sum * 2]);
-
-      // console.log(b[check.list[i]], b[check.list[i + check.sum]],
-      //   b[check.list[i + check.sum]], b[check.list[i + check.sum * 2]]);
-
       if(b[check.list[i]] && b[check.list[i]] === b[check.list[i] + check.sum] &&
         b[check.list[i] + check.sum] === b[check.list[i] + check.sum * 2]){
-        this.setState({ winner: true });
+        this.setState({ winner: b[check.list[i] + check.sum * 2] });
       }
     }
   }
@@ -58,23 +54,43 @@ class GameBoard extends React.Component {
   move(pos, player) {
     var matrix = this.state.boardMatrix;
     if(!matrix[pos]){
-      matrix[pos] = (player === 'user') ? 'o' : 'x';
+      matrix[pos] = (player === 'user') ? 'O' : 'X';
       this.setState({ boardMatrix: matrix }, this.checkWin());
     }else{
-      console.log('wrong move bucko');
+      swal({
+        title: "Error!",
+        text: "Wrong move!",
+        type: "error",
+        confirmButtonText: "Got it!"
+      });
     }
-    console.log(this.state)
     if (this.state.winner) {
-      alert('win')
-    } else {
-      console.log('keep playin');
+      swal({
+        title: "Winner!",
+        text: `${this.state.winner} wins the game!`,
+        type: "success",
+        confirmButtonText: "Got it!"
+      });
     }
+  }
+
+  computerMove(){
+    const self = this;
+    req.post('/plays')
+      .send({ board: this.state.boardMatrix, player: 1 })
+      .set('Accept', 'application/json')
+      .end(function(err, res){
+        self.move(res.body.move, 'computer');
+        self.setState({frozen: false});
+      });
   }
 
   render() {
     const clickHandler = (e) => {
       if(!this.state.frozen && this.state.turn)
       this.move(e.target.dataset.cell, 'user');
+      this.setState({frozen: true});
+      this.computerMove();
     }
 
     return (
