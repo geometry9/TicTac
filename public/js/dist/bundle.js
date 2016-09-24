@@ -21545,6 +21545,7 @@
 	      if (!this.state.winner) {
 	        this.iterateArray(diagonalCheck2);
 	      }
+	      this.state.winner;
 	    }
 	  }, {
 	    key: 'iterateArray',
@@ -21553,12 +21554,27 @@
 	      for (var i = 0; i < check.list.length; i++) {
 	        if (b[check.list[i]] && b[check.list[i]] === b[check.list[i] + check.sum] && b[check.list[i] + check.sum] === b[check.list[i] + check.sum * 2]) {
 	          this.setState({ winner: b[check.list[i] + check.sum * 2] });
+	        } else if (b.indexOf(null) === -1) {
+	          this.setState({ stalemate: true });
 	        }
 	      }
 	    }
 	  }, {
+	    key: 'restart',
+	    value: function restart() {
+	      this.setState({
+	        boardMatrix: this.clearBoard(),
+	        winner: false,
+	        stalemate: false,
+	        frozen: false,
+	        turn: true
+	      });
+	    }
+	  }, {
 	    key: 'move',
 	    value: function move(pos, player) {
+	      var _this2 = this;
+
 	      var matrix = this.state.boardMatrix;
 	      if (!matrix[pos]) {
 	        matrix[pos] = player === 'user' ? 'O' : 'X';
@@ -21576,7 +21592,18 @@
 	          title: "Winner!",
 	          text: this.state.winner + ' wins the game!',
 	          type: "success",
-	          confirmButtonText: "Got it!"
+	          confirmButtonText: "Restart"
+	        }, function () {
+	          return _this2.restart();
+	        });
+	      } else if (this.state.stalemate) {
+	        (0, _sweetalert2.default)({
+	          title: "UHOH!",
+	          text: "Draw!",
+	          type: "info",
+	          confirmButtonText: "Restart"
+	        }, function () {
+	          return _this2.restart();
 	        });
 	      }
 	    }
@@ -21592,12 +21619,12 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this3 = this;
 
 	      var clickHandler = function clickHandler(e) {
-	        if (!_this2.state.frozen && _this2.state.turn) _this2.move(e.target.dataset.cell, 'user');
-	        _this2.setState({ frozen: true });
-	        _this2.computerMove();
+	        if (!_this3.state.frozen && _this3.state.turn) _this3.move(e.target.dataset.cell, 'user');
+	        _this3.setState({ frozen: true });
+	        _this3.computerMove();
 	      };
 
 	      return _react2.default.createElement(

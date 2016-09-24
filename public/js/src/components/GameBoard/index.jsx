@@ -48,6 +48,7 @@ class GameBoard extends React.Component {
     if(!this.state.winner){
       this.iterateArray(diagonalCheck2);
     }
+    this.state.winner
   }
 
   iterateArray(check){
@@ -56,8 +57,20 @@ class GameBoard extends React.Component {
       if(b[check.list[i]] && b[check.list[i]] === b[check.list[i] + check.sum] &&
         b[check.list[i] + check.sum] === b[check.list[i] + check.sum * 2]){
         this.setState({ winner: b[check.list[i] + check.sum * 2] });
+      }else if(b.indexOf(null) === -1){
+        this.setState({ stalemate: true });
       }
     }
+  }
+
+  restart(){
+    this.setState({
+      boardMatrix: this.clearBoard(),
+      winner: false,
+      stalemate: false,
+      frozen: false,
+      turn: true
+    });
   }
 
   move(pos, player) {
@@ -78,8 +91,15 @@ class GameBoard extends React.Component {
         title: "Winner!",
         text: `${this.state.winner} wins the game!`,
         type: "success",
-        confirmButtonText: "Got it!"
-      });
+        confirmButtonText: "Restart"
+      }, () => this.restart());
+    } else if(this.state.stalemate){
+      swal({
+        title: "UHOH!",
+        text: "Draw!",
+        type: "info",
+        confirmButtonText: "Restart"
+      }, () => this.restart());
     }
   }
 
