@@ -15,6 +15,15 @@ class GameBoard extends React.Component {
     };
   }
 
+  componentDidMount(){
+    swal({
+      title: "Start",
+      text: "Start the game by clicking on a cell.",
+      type: "info",
+      confirmButtonText: "Start!"
+    });
+  }
+
   clearBoard() {
     return [null,null,null,
      null,null,null,
@@ -95,38 +104,20 @@ class GameBoard extends React.Component {
 
     return (
       <div className="grid">
-        <div className="row">
-          <div className="col-3">
-            <div key={ 0 } onClick={ clickHandler } data-cell={ 0 }>{this.state.boardMatrix[0]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 1 } onClick={ clickHandler } data-cell={ 1 }>{this.state.boardMatrix[1]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 2 } onClick={ clickHandler } data-cell={ 2 }>{this.state.boardMatrix[2]}</div>
-          </div>
+        <div className="col">
+            <div className="cell" key={ 0 } onClick={ clickHandler } data-cell={ 0 }>{this.state.boardMatrix[0]}</div>
+            <div className="cell" key={ 3 } onClick={ clickHandler } data-cell={ 3 }>{this.state.boardMatrix[3]}</div>
+            <div className="cell" key={ 6 } onClick={ clickHandler } data-cell={ 6 }>{this.state.boardMatrix[6]}</div>
         </div>
-        <div className="row">
-          <div className="col-3">
-            <div key={ 3 } onClick={ clickHandler } data-cell={ 3 }>{this.state.boardMatrix[3]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 4 } onClick={ clickHandler } data-cell={ 4 }>{this.state.boardMatrix[4]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 5 } onClick={ clickHandler } data-cell={ 5 }>{this.state.boardMatrix[5]}</div>
-          </div>
+        <div className="col">
+          <div className="cell" key={ 1 } onClick={ clickHandler } data-cell={ 1 }>{this.state.boardMatrix[1]}</div>
+          <div className="cell" key={ 4 } onClick={ clickHandler } data-cell={ 4 }>{this.state.boardMatrix[4]}</div>
+          <div className="cell" key={ 7 } onClick={ clickHandler } data-cell={ 7 }>{this.state.boardMatrix[7]}</div>
         </div>
-        <div className="row">
-          <div className="col-3">
-            <div key={ 6 } onClick={ clickHandler } data-cell={ 6 }>{this.state.boardMatrix[6]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 7 } onClick={ clickHandler } data-cell={ 7 }>{this.state.boardMatrix[7]}</div>
-          </div>
-          <div className="col-3">
-            <div key={ 8 } onClick={ clickHandler } data-cell={ 8 }>{this.state.boardMatrix[8]}</div>
-          </div>
+        <div className="col">
+          <div className="cell" key={ 2 } onClick={ clickHandler } data-cell={ 2 }>{this.state.boardMatrix[2]}</div>
+          <div className="cell" key={ 5 } onClick={ clickHandler } data-cell={ 5 }>{this.state.boardMatrix[5]}</div>
+          <div className="cell" key={ 8 } onClick={ clickHandler } data-cell={ 8 }>{this.state.boardMatrix[8]}</div>
         </div>
       </div>
     );

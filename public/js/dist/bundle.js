@@ -21476,11 +21476,11 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _sweetalert = __webpack_require__(175);
+	var _sweetalert = __webpack_require__(173);
 
 	var _sweetalert2 = _interopRequireDefault(_sweetalert);
 
-	var _superagent = __webpack_require__(184);
+	var _superagent = __webpack_require__(182);
 
 	var _superagent2 = _interopRequireDefault(_superagent);
 
@@ -21511,6 +21511,16 @@
 	  }
 
 	  _createClass(GameBoard, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      (0, _sweetalert2.default)({
+	        title: "Start",
+	        text: "Start the game by clicking on a cell.",
+	        type: "info",
+	        confirmButtonText: "Start!"
+	      });
+	    }
+	  }, {
 	    key: 'clearBoard',
 	    value: function clearBoard() {
 	      return [null, null, null, null, null, null, null, null, null];
@@ -21595,95 +21605,59 @@
 	        { className: 'grid' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'col' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 0, onClick: clickHandler, 'data-cell': 0 },
-	              this.state.boardMatrix[0]
-	            )
+	            { className: 'cell', key: 0, onClick: clickHandler, 'data-cell': 0 },
+	            this.state.boardMatrix[0]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 1, onClick: clickHandler, 'data-cell': 1 },
-	              this.state.boardMatrix[1]
-	            )
+	            { className: 'cell', key: 3, onClick: clickHandler, 'data-cell': 3 },
+	            this.state.boardMatrix[3]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 2, onClick: clickHandler, 'data-cell': 2 },
-	              this.state.boardMatrix[2]
-	            )
+	            { className: 'cell', key: 6, onClick: clickHandler, 'data-cell': 6 },
+	            this.state.boardMatrix[6]
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'col' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 3, onClick: clickHandler, 'data-cell': 3 },
-	              this.state.boardMatrix[3]
-	            )
+	            { className: 'cell', key: 1, onClick: clickHandler, 'data-cell': 1 },
+	            this.state.boardMatrix[1]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 4, onClick: clickHandler, 'data-cell': 4 },
-	              this.state.boardMatrix[4]
-	            )
+	            { className: 'cell', key: 4, onClick: clickHandler, 'data-cell': 4 },
+	            this.state.boardMatrix[4]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 5, onClick: clickHandler, 'data-cell': 5 },
-	              this.state.boardMatrix[5]
-	            )
+	            { className: 'cell', key: 7, onClick: clickHandler, 'data-cell': 7 },
+	            this.state.boardMatrix[7]
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'row' },
+	          { className: 'col' },
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 6, onClick: clickHandler, 'data-cell': 6 },
-	              this.state.boardMatrix[6]
-	            )
+	            { className: 'cell', key: 2, onClick: clickHandler, 'data-cell': 2 },
+	            this.state.boardMatrix[2]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 7, onClick: clickHandler, 'data-cell': 7 },
-	              this.state.boardMatrix[7]
-	            )
+	            { className: 'cell', key: 5, onClick: clickHandler, 'data-cell': 5 },
+	            this.state.boardMatrix[5]
 	          ),
 	          _react2.default.createElement(
 	            'div',
-	            { className: 'col-3' },
-	            _react2.default.createElement(
-	              'div',
-	              { key: 8, onClick: clickHandler, 'data-cell': 8 },
-	              this.state.boardMatrix[8]
-	            )
+	            { className: 'cell', key: 8, onClick: clickHandler, 'data-cell': 8 },
+	            this.state.boardMatrix[8]
 	          )
 	        )
 	      );
@@ -21696,9 +21670,7 @@
 	exports.default = GameBoard;
 
 /***/ },
-/* 173 */,
-/* 174 */,
-/* 175 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21716,35 +21688,35 @@
 	 * jQuery-like functions for manipulating the DOM
 	 */
 
-	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation = __webpack_require__(176);
+	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide$isDescendant$getTopMargin$fadeIn$fadeOut$fireClick$stopEventPropagation = __webpack_require__(174);
 
 	/*
 	 * Handy utilities
 	 */
 
-	var _extend$hexToRgb$isIE8$logStr$colorLuminance = __webpack_require__(177);
+	var _extend$hexToRgb$isIE8$logStr$colorLuminance = __webpack_require__(175);
 
 	/*
 	 *  Handle sweetAlert's DOM elements
 	 */
 
-	var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition = __webpack_require__(178);
+	var _sweetAlertInitialize$getModal$getOverlay$getInput$setFocusStyle$openModal$resetInput$fixVerticalPosition = __webpack_require__(176);
 
 	// Handle button events and keyboard events
 
-	var _handleButton$handleConfirm$handleCancel = __webpack_require__(181);
+	var _handleButton$handleConfirm$handleCancel = __webpack_require__(179);
 
-	var _handleKeyDown = __webpack_require__(182);
+	var _handleKeyDown = __webpack_require__(180);
 
 	var _handleKeyDown2 = _interopRequireWildcard(_handleKeyDown);
 
 	// Default values
 
-	var _defaultParams = __webpack_require__(179);
+	var _defaultParams = __webpack_require__(177);
 
 	var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 
-	var _setParameters = __webpack_require__(183);
+	var _setParameters = __webpack_require__(181);
 
 	var _setParameters2 = _interopRequireWildcard(_setParameters);
 
@@ -22006,7 +21978,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 176 */
+/* 174 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22202,7 +22174,7 @@
 	exports.stopEventPropagation = stopEventPropagation;
 
 /***/ },
-/* 177 */
+/* 175 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22280,7 +22252,7 @@
 	exports.colorLuminance = colorLuminance;
 
 /***/ },
-/* 178 */
+/* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22291,11 +22263,11 @@
 	  value: true
 	});
 
-	var _hexToRgb = __webpack_require__(177);
+	var _hexToRgb = __webpack_require__(175);
 
-	var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(176);
+	var _removeClass$getTopMargin$fadeIn$show$addClass = __webpack_require__(174);
 
-	var _defaultParams = __webpack_require__(179);
+	var _defaultParams = __webpack_require__(177);
 
 	var _defaultParams2 = _interopRequireWildcard(_defaultParams);
 
@@ -22303,7 +22275,7 @@
 	 * Add modal + overlay to DOM
 	 */
 
-	var _injectedHTML = __webpack_require__(180);
+	var _injectedHTML = __webpack_require__(178);
 
 	var _injectedHTML2 = _interopRequireWildcard(_injectedHTML);
 
@@ -22452,7 +22424,7 @@
 	exports.fixVerticalPosition = fixVerticalPosition;
 
 /***/ },
-/* 179 */
+/* 177 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -22489,7 +22461,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 180 */
+/* 178 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -22536,7 +22508,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 181 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22545,11 +22517,11 @@
 	  value: true
 	});
 
-	var _colorLuminance = __webpack_require__(177);
+	var _colorLuminance = __webpack_require__(175);
 
-	var _getModal = __webpack_require__(178);
+	var _getModal = __webpack_require__(176);
 
-	var _hasClass$isDescendant = __webpack_require__(176);
+	var _hasClass$isDescendant = __webpack_require__(174);
 
 	/*
 	 * User clicked on "Confirm"/"OK" or "Cancel"
@@ -22676,7 +22648,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 182 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22685,9 +22657,9 @@
 	  value: true
 	});
 
-	var _stopEventPropagation$fireClick = __webpack_require__(176);
+	var _stopEventPropagation$fireClick = __webpack_require__(174);
 
-	var _setFocusStyle = __webpack_require__(178);
+	var _setFocusStyle = __webpack_require__(176);
 
 	var handleKeyDown = function handleKeyDown(event, params, modal) {
 	  var e = event || window.event;
@@ -22760,7 +22732,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 183 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22769,11 +22741,11 @@
 	  value: true
 	});
 
-	var _isIE8 = __webpack_require__(177);
+	var _isIE8 = __webpack_require__(175);
 
-	var _getModal$getInput$setFocusStyle = __webpack_require__(178);
+	var _getModal$getInput$setFocusStyle = __webpack_require__(176);
 
-	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide = __webpack_require__(176);
+	var _hasClass$addClass$removeClass$escapeHtml$_show$show$_hide$hide = __webpack_require__(174);
 
 	var alertTypes = ['error', 'warning', 'info', 'success', 'input', 'prompt'];
 
@@ -22990,7 +22962,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 184 */
+/* 182 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23007,9 +22979,9 @@
 	  root = this;
 	}
 
-	var Emitter = __webpack_require__(185);
-	var requestBase = __webpack_require__(186);
-	var isObject = __webpack_require__(187);
+	var Emitter = __webpack_require__(183);
+	var requestBase = __webpack_require__(184);
+	var isObject = __webpack_require__(185);
 
 	/**
 	 * Noop.
@@ -23021,7 +22993,7 @@
 	 * Expose `request`.
 	 */
 
-	var request = module.exports = __webpack_require__(188).bind(null, Request);
+	var request = module.exports = __webpack_require__(186).bind(null, Request);
 
 	/**
 	 * Determine XHR.
@@ -23972,7 +23944,7 @@
 
 
 /***/ },
-/* 185 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -24141,13 +24113,13 @@
 
 
 /***/ },
-/* 186 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
 	 * Module of mixed-in functions shared between node and client code
 	 */
-	var isObject = __webpack_require__(187);
+	var isObject = __webpack_require__(185);
 
 	/**
 	 * Clear previous timeout.
@@ -24519,7 +24491,7 @@
 
 
 /***/ },
-/* 187 */
+/* 185 */
 /***/ function(module, exports) {
 
 	/**
@@ -24538,7 +24510,7 @@
 
 
 /***/ },
-/* 188 */
+/* 186 */
 /***/ function(module, exports) {
 
 	// The node and browser modules expose versions of this with the

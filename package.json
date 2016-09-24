@@ -18,7 +18,7 @@
   "scripts": {
     "test": "npm run jshint && npm run mocha",
     "jshint": "jshint src/. test/. --config",
-    "start": "babel-node src/",
+    "start": "babel-watch src/",
     "mocha": "mocha test/ --compilers js:babel-core/register --recursive"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "babel-watch": "^2.0.3-rc0",
     "feathers-rest": "^1.5.0",
     "jshint": "^2.9.3",
     "lodash": "^4.16.1",
