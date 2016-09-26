@@ -21588,14 +21588,16 @@
 	        });
 	      }
 	      if (this.state.winner) {
-	        (0, _sweetalert2.default)({
-	          title: "Winner!",
-	          text: this.state.winner + ' wins the game!',
-	          type: "success",
-	          confirmButtonText: "Restart"
-	        }, function () {
-	          return _this2.restart();
-	        });
+	        setTimeout(function () {
+	          return (0, _sweetalert2.default)({
+	            title: "Winner!",
+	            text: _this2.state.winner + ' wins the game!',
+	            type: "success",
+	            confirmButtonText: "Restart"
+	          }, function () {
+	            return _this2.restart();
+	          });
+	        }, 800);
 	      } else if (this.state.stalemate) {
 	        (0, _sweetalert2.default)({
 	          title: "UHOH!",
@@ -21612,8 +21614,10 @@
 	    value: function computerMove() {
 	      var self = this;
 	      _superagent2.default.post('/plays').send({ board: this.state.boardMatrix, player: 1 }).set('Accept', 'application/json').end(function (err, res) {
-	        self.move(res.body.move, 'computer');
-	        self.setState({ frozen: false });
+	        setTimeout(function () {
+	          self.move(res.body.move, 'computer');
+	          self.setState({ frozen: false, turn: true });
+	        }, 1500);
 	      });
 	    }
 	  }, {
@@ -21623,7 +21627,7 @@
 
 	      var clickHandler = function clickHandler(e) {
 	        if (!_this3.state.frozen && _this3.state.turn) _this3.move(e.target.dataset.cell, 'user');
-	        _this3.setState({ frozen: true });
+	        _this3.setState({ frozen: true, turn: false });
 	        _this3.computerMove();
 	      };
 

@@ -1,4 +1,5 @@
 'use strict';
+import { random } from 'lodash';
 
 const hooks = require('./hooks');
 
@@ -7,10 +8,26 @@ class AI {
     this.state = {
       board: board,
       maxPlayer: 'X',
-      minPlayer: '0',
+      minPlayer: 'O',
     };
-    const move = this.findMove(this.state.board);
+    const probability = 70;
+    const r = random(1, 100);
+    let move = null;
+    if(r < probability){
+        move = this.findMove(this.state.board);
+    } else {
+      move = this.dumbMove();
+    }
+
     return { move };
+  }
+
+  dumbMove(){
+   for (var i = 0; i < this.state.board.length; i++) {
+     if(!this.state.board[i]){
+       return i;
+     }
+   }
   }
 
   setMinMaxPlayers(maxPlayer, minPlayer) {
@@ -41,7 +58,7 @@ class AI {
 
   checkTie(board) {
       for (var i = 0; i < board.length; i++) {
-          if (board[i] === 0) {
+          if (board[i] === null) {
               return false;
           }
       }
@@ -64,8 +81,6 @@ class AI {
       var move = 0;
       for (var i = 0; i < board.length; i++) {
           var newBoard = this.makeMove(i, this.state.maxPlayer, board);
-          console.log('----------');
-          console.log(newBoard);
           if (newBoard) {
               var predictedMoveValue = this.minValue(newBoard);
               if (predictedMoveValue > bestMoveValue) {
@@ -132,8 +147,7 @@ class Service {
   }
 
   create(data, params) {
-    console.log(data.board);
-    const aiInstance = new AI(data.board, 1);
+    const aiInstance = new AI(data.board);
     return Promise.resolve({ move: aiInstance.move });
   }
 }

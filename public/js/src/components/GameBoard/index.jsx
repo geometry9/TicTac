@@ -87,12 +87,14 @@ class GameBoard extends React.Component {
       });
     }
     if (this.state.winner) {
-      swal({
-        title: "Winner!",
-        text: `${this.state.winner} wins the game!`,
-        type: "success",
-        confirmButtonText: "Restart"
-      }, () => this.restart());
+      setTimeout(() =>
+        swal({
+          title: "Winner!",
+          text: `${this.state.winner} wins the game!`,
+          type: "success",
+          confirmButtonText: "Restart"
+        }, () => this.restart())
+      ,800);
     } else if(this.state.stalemate){
       swal({
         title: "UHOH!",
@@ -109,8 +111,11 @@ class GameBoard extends React.Component {
       .send({ board: this.state.boardMatrix, player: 1 })
       .set('Accept', 'application/json')
       .end(function(err, res){
-        self.move(res.body.move, 'computer');
-        self.setState({frozen: false});
+        setTimeout(()=> {
+          self.move(res.body.move, 'computer');
+          self.setState({ frozen: false, turn: true });
+        }, 1500);
+
       });
   }
 
@@ -118,7 +123,7 @@ class GameBoard extends React.Component {
     const clickHandler = (e) => {
       if(!this.state.frozen && this.state.turn)
       this.move(e.target.dataset.cell, 'user');
-      this.setState({frozen: true});
+      this.setState({ frozen: true, turn: false });
       this.computerMove();
     }
 
