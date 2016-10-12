@@ -13,11 +13,8 @@ class AI {
     const probability = 70;
     const r = random(1, 100);
     let move = null;
-    if(r < probability){
-        move = this.findMove(this.state.board);
-    } else {
-      move = this.dumbMove();
-    }
+    
+    move = this.findMove(this.state.board);
 
     return { move };
   }
